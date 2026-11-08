@@ -37,6 +37,7 @@ let hoverNode: GNode | null = null
 let nodeObjs = new Map<string, any>() // node id → THREE group
 let nbNodes = new Set<GNode>()
 let nbLinks = new Set<GLink>()
+const legendFolded = ref(false)
 const CHAPTER_LABEL_DIST = 230
 
 const kindSize: Record<string, { r: number; glow: number }> = {
@@ -322,10 +323,15 @@ onBeforeUnmount(() => {
     </div>
 
     <!-- track legend -->
-    <ul class="galaxy-legend">
+    <ul class="galaxy-legend" :class="{ folded: legendFolded }">
+      <button class="legend-toggle" @click="legendFolded = !legendFolded" :aria-expanded="!legendFolded">
+        {{ legendFolded ? '◧ Legend' : '◧ Legend ▾' }}
+      </button>
+      <template v-if="!legendFolded">
       <li v-for="m in TRACK_META" :key="m.slug">
         <i :style="{ background: TRACK_COLORS[m.slug] ?? '#94a3b8' }"></i>{{ m.label }}
       </li>
+      </template>
     </ul>
   </div>
 </template>
@@ -424,6 +430,12 @@ onBeforeUnmount(() => {
   font-size: 0.68rem; color: #aab8e8;
   max-height: 45%; overflow-y: auto;
 }
+.legend-toggle {
+  all: unset; cursor: pointer; font-size: 10px; color: #c7d2fe;
+  padding: 0 0 0.25rem; letter-spacing: 0.02em;
+}
+.legend-toggle:hover { color: #fff; }
+.galaxy-legend.folded { padding: 0.35rem 0.55rem; }
 .galaxy-legend li { display: flex; align-items: center; gap: 0.4rem; padding: 0.1rem 0; white-space: nowrap; }
 .galaxy-legend i { width: 8px; height: 8px; border-radius: 50%; flex: none; box-shadow: 0 0 6px currentColor; }
 

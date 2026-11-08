@@ -113,6 +113,10 @@ function showTip(sec: string, c: Chap) {
 }
 const hideTip = () => { tip.value = null }
 
+// two-letter code from the label's words (e.g. 'Query Plans & Optimization' → 'QP')
+const code = (c: Chap) =>
+  c.label.split(/\s+/).filter(w => /^[A-Za-z]/.test(w)).slice(0, 2).map(w => w[0]).join('').toUpperCase() || c.label.charAt(0)
+
 let onVis: () => void
 onMounted(() => {
   here.value = norm(location.pathname)
@@ -162,14 +166,14 @@ onUnmounted(() => {
               @mouseleave="hideTip"
               @focus="showTip(s.slug, c)"
               @blur="hideTip"
-            ><span>{{ stateOf(c) === 'done' ? '✓' : c.label.charAt(0) }}</span></a>
+            ><span>{{ stateOf(c) === 'done' ? '✓' : code(c) }}</span></a>
             <div
               v-if="tip && tip.sec === s.slug"
               class="tip"
               :class="{ below: !tip.above }"
               :style="{ left: tip.left + 'px', top: tip.top + 'px' }"
             >
-              <b>{{ tip.title }}</b>
+              <strong class="tip-title">{{ tip.title }}</strong>
               <p v-if="tip.blurb">{{ tip.blurb }}</p>
               <em>{{ tip.state }}</em>
             </div>
@@ -205,7 +209,7 @@ onUnmounted(() => {
 .path { position: absolute; inset: 0; }
 .node {
   position: absolute; width: 48px; height: 48px; border-radius: 50%; z-index: 2;
-  display: grid; place-items: center; font-weight: 700; font-size: 1.05rem; text-decoration: none;
+  display: grid; place-items: center; font-weight: 700; font-size: 0.85rem; text-decoration: none; letter-spacing: -0.02em;
   color: var(--tc); background: var(--vp-c-bg); border: 3px dashed var(--tc);
   transition: transform 0.15s;
 }
@@ -222,7 +226,7 @@ onUnmounted(() => {
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.14); pointer-events: none;
 }
 .node span { position: relative; z-index: 1; }
-.tip b { display: block; color: var(--vp-c-text-1); font-size: 0.85rem; }
+.tip-title { display: block; color: var(--vp-c-text-1); font-size: 0.85rem; font-weight: 700; }
 .tip p { margin: 0.2rem 0; }
 .tip em { font-style: normal; font-weight: 600; color: var(--vp-c-brand-1); }
 .note { margin: 0.75rem 0 0; font-size: 0.78rem; color: var(--vp-c-text-3); }

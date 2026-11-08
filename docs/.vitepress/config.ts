@@ -15,19 +15,29 @@ export default withMermaid(
       nav: [
         { text: 'Home', link: '/' },
         { text: 'How to Learn', link: '/how-to-learn' },
-        { text: 'Intuitions', link: '/intuitions/' },
-        { text: 'Interview', link: '/interview/' },
         { text: '🪐 Galaxy', link: '/explore/' },
         { text: '🗺️ Map', link: '/map/' },
-        { text: 'Platforms', link: '/fundamentals/' },
-        { text: 'Pipelines', link: '/pipelines/' },
-        { text: 'SQL', link: '/sql/' },
-        { text: 'Python', link: '/python/' },
-        { text: 'Spark', link: '/spark/' },
-        { text: 'Streaming', link: '/streaming/' },
-        { text: 'System Design', link: '/system-design/' },
-        { text: 'Cloud', link: '/cloud/' },
-        { text: 'DataOps', link: '/dataops/' }
+        {
+          text: 'Learn',
+          items: [
+            { text: 'Visual Intuitions', link: '/intuitions/' },
+            { text: 'Data Platforms', link: '/fundamentals/' },
+            { text: 'Pipelines & Architecture', link: '/pipelines/' },
+            { text: 'SQL Deep Dive', link: '/sql/' },
+            { text: 'Python Deep Dive', link: '/python/' },
+            { text: 'Spark Deep Dive', link: '/spark/' },
+            { text: 'Streaming Systems', link: '/streaming/' }
+          ]
+        },
+        {
+          text: 'Design & Ops',
+          items: [
+            { text: 'System Design', link: '/system-design/' },
+            { text: 'Cloud Platforms', link: '/cloud/' },
+            { text: 'DataOps & Orchestration', link: '/dataops/' }
+          ]
+        },
+        { text: 'Interview', link: '/interview/' }
       ],
       outline: { level: [2, 3] },
       docFooter: { prev: 'Previous', next: 'Next' },
