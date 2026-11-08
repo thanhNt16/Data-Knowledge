@@ -3,6 +3,7 @@ import { withMermaid } from 'vitepress-plugin-mermaid'
 
 export default withMermaid(
   defineConfig({
+    base: '/Data-Knowledge/',
     markdown: { math: true },
     title: 'Data Engineering Knowledge',
     description:
