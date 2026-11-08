@@ -1,0 +1,18 @@
+/* Site-wide content styling on top of the default VitePress theme */
+
+/* Callout titles: senior-learner voice */
+.vp-doc .custom-block .custom-block-title { font-weight: 700; }
+
+/* Slightly larger mermaid diagrams, centered */
+.vp-doc .mermaid-wrapper, .vp-doc .mermaid {
+  display: flex;
+  justify-content: center;
+  margin: 1.25rem auto;
+}
+.vp-doc .mermaid svg { max-width: 100%; height: auto; }
+
+/* Tables readable */
+.vp-doc table { display: table; width: 100%; font-size: 0.92rem; }
+
+/* Keyboard-friendly quiz focus */
+.quiz-opt:focus-visible { outline: 2px solid var(--vp-c-brand-1); outline-offset: 2px; }
